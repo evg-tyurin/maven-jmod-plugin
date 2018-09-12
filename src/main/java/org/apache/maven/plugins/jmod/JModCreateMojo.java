@@ -336,6 +336,8 @@ public class JModCreateMojo
             // We use the real module name and not the artifact Id...
             this.modulePaths.add( item.getKey() );
         }
+        // TODO modulePaths
+        this.modulePaths.clear();
         // The jmods directory of the JDK
         this.modulePaths.add( jmodsFolderJDK.getAbsolutePath() );
 
@@ -438,7 +440,10 @@ public class JModCreateMojo
 
         for ( Artifact a : project.getArtifacts() )
         {
-            list.add( a.getFile() );
+            if ( !a.getScope().equals( "provided" ) )
+            {
+                list.add( a.getFile() );
+            }
         }
         return list;
     }
