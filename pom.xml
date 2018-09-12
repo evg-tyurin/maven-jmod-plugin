@@ -30,7 +30,7 @@
   </parent>
 
   <artifactId>maven-jmod-plugin</artifactId>
-  <version>3.0.0-alpha-2-SNAPSHOT</version>
+  <version>3.0.0-alpha-2-20180911-original</version>
   <packaging>maven-plugin</packaging>
 
   <name>Apache Maven JMod Plugin</name>
@@ -60,6 +60,11 @@
       <id>apache.website</id>
       <url>scm:svn:https://svn.apache.org/repos/asf/maven/website/components/${maven.site.path}</url>
     </site>
+	<repository>
+		<id>nexus.repo</id>
+		<name>Nexus repository</name>
+		<url>http://nexus:8083/nexus/content/repositories/releases/</url>
+	</repository>
   </distributionManagement>
 
   <properties>
@@ -105,6 +110,20 @@
   </dependencies>
 
   <build>
+    <plugins>
+		<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+			<artifactId>maven-source-plugin</artifactId>
+			<executions>
+				<execution>
+					<id>attach-sources</id>
+					<goals>
+						<goal>jar</goal>
+					</goals>
+				</execution>
+			</executions>
+		</plugin>    
+    </plugins>
     <pluginManagement>
       <plugins>
         <plugin>
@@ -197,5 +216,15 @@
       </build>
     </profile>
   </profiles>
+	<repositories>
+		<repository>
+			<id>releases</id>
+			<url>http://nexus:8083/nexus/content/repositories/releases</url>
+		</repository>
+		<repository>
+			<id>snapshots</id>
+			<url>http://nexus:8083/nexus/content/repositories/snapshots</url>
+		</repository>
+	</repositories>
 
 </project>
